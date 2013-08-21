@@ -1,10 +1,11 @@
 
+
 Doyousketch2's Stained Glass mod
-ver 1.2
+ver 1.3
 
 Image: http://oi47.tinypic.com/hst6s3.jpg
 
-With alpha enabled: http://oi44.tinypic.com/5vraxf.jpg
+With alpha enabled: http://oi44.tinypic.com/5vraxf.jpg 
 
 ==============================================================================
 

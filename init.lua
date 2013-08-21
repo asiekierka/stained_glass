@@ -1,6 +1,6 @@
 --[[
 
-Stained Glass 1.2
+Stained Glass 1.3
 
 This mod provides luminescent stained glass blocks for Minetest 0.4.x.
 
@@ -16,6 +16,9 @@ Email: doyousketch2 @ yahoo.com
 
 Unified Dyes was released under GNU-GPL 2.0, see LICENSE for info.
 More Blocks was released under zlib/libpng for code and CC BY-SA 3.0 Unported for textures, see LICENSE.txt for info.
+
+Additional changes by VanessaEzekowitz in July 2013 to take all items 
+out of creative inventory.
 
 ==============================================================================
 
@@ -149,7 +152,7 @@ for h = 1, 12 do
 				use_texture_alpha = true,
 				light_source = 14,
 				is_ground_content = true,
-				groups = {snappy=2,cracky=3,oddly_breakable_by_hand=3},
+				groups = {snappy=2,cracky=3,oddly_breakable_by_hand=3, not_in_creative_inventory=1},
 				sounds = default.node_sound_glass_defaults()
 				})
 		end  --sat
@@ -192,7 +195,7 @@ for h = 1, 12 do
 				use_texture_alpha = true,
 				light_source = 14,
 				is_ground_content = true,
-				groups = {snappy=2,cracky=3,oddly_breakable_by_hand=3},
+				groups = {snappy=2,cracky=3,oddly_breakable_by_hand=3, not_in_creative_inventory=1},
 				sounds = default.node_sound_glass_defaults()
 				})
 
@@ -236,7 +239,7 @@ for h = 1, 12 do
 				use_texture_alpha = true,
 				light_source = 14,
 				is_ground_content = true,
-				groups = {snappy=2,cracky=3,oddly_breakable_by_hand=3},
+				groups = {snappy=2,cracky=3,oddly_breakable_by_hand=3, not_in_creative_inventory=1},
 				sounds = default.node_sound_glass_defaults()
 				})
 
@@ -281,7 +284,7 @@ for h = 1, 12 do
 				use_texture_alpha = true,
 				light_source = 14,
 				is_ground_content = true,
-				groups = {snappy=2,cracky=3,oddly_breakable_by_hand=3},
+				groups = {snappy=2,cracky=3,oddly_breakable_by_hand=3, not_in_creative_inventory=1},
 				sounds = default.node_sound_glass_defaults()
 				})
 
