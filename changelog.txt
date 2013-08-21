@@ -3,6 +3,17 @@ Changelog
 
 ---------
 
+ver 1.4
+
+Thu 22 Aug 2013
+*phew*  made aliases for all numeric block names to map to new color-name based scheme
+updated craft recipes to work with new dyes format
+rejiggered whole system of block and craft registration
+set to have all blocks at LIGHT_MAX -- since they were manually specifying '14' as a light level before (which is current max)
+nothing returns buckets anymore, because you don't need buckets to make the dyes to make the blocks.
+
+---------
+
 ver 1.1
 
 Sun 24 Feb 2013 05:26:29 AM EST 

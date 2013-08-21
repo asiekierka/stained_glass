@@ -1,11 +1,16 @@
 
 
 Doyousketch2's Stained Glass mod
-ver 1.3
+ ver 1.4
 
 Image: http://oi47.tinypic.com/hst6s3.jpg
 
 With alpha enabled: http://oi44.tinypic.com/5vraxf.jpg 
+
+==============================================================================
+Originally developed by Eli Innes/Doyousketch2, and distributed 
+under GPL v2.  Further changes by VanessaE (removing from creative inventory)
+and Jeremy Anderson (fixing craft recipes, renaming blocks)
 
 ==============================================================================
 
@@ -23,6 +28,14 @@ Doyousketch2-stained_glass-1.1 -or- stained_glass-master
 to simply read "stained_glass"
 
 then move it into your Minetest mods folder.
+
+Even better, get stained_glass from one of the github pages:
+https://github.com/doyousketch2/stained_glass
+https://github.com/VanessaE/stained_glass
+https://github.com/andersje/stained_glass
+
+-- this will get you the latest version of the code, and you
+can update at any time by doing a git pull
 
 ==============================================================================
 
@@ -61,8 +74,6 @@ image: http://oi45.tinypic.com/2wbvkti.jpg
 
 
 All recipes produce three glowing stained glass blocks.
-Pastel blocks give back an empty bucket.
-Faint blocks give back two empty buckets.
 
 
 ==============================================================================
@@ -82,6 +93,19 @@ as well as light, pastel, and faint tints.
 
 Misc. Notes
 -----------
+
+Blocks are now available by name:  
+e.g.  /giveme stained_glass:orange 3 #  get 3 orange sg blocks
+or /giveme stained_glass:light_yellow
+or /giveme stained_glass:pastel_yellow
+or /giveme stained_glass:faint_yellow
+or /giveme stained_glass:yellow
+
+You get the idea.  
+
+
+NUMERIC CODES FOR BLOCKS  (this is the old way of coding these blocks
+developed by Doyousketch2)
 
 Please don't try to use /give commands, the items are now in numerical format,
 and it would be tough to try to explain it.
