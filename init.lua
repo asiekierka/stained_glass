@@ -75,7 +75,7 @@ function makenode(arg)
 		use_texture_alpha = true,
 		light_source = arg.light,
 		is_ground_content = true,
-		groups = {snappy=2,cracky=3,oddly_breakable_by_hand=3}, -- , not_in_creative_inventory=1},
+		groups = {snappy=2,cracky=3,oddly_breakable_by_hand=3, not_in_creative_inventory=1},
 		sounds = default.node_sound_glass_defaults()
 	})
 end
