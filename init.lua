@@ -1,6 +1,6 @@
 --[[
 
-Stained Glass 1.4
+Stained Glass 1.5
 
 This mod provides luminescent stained glass blocks for Minetest 0.4.x.
 
@@ -51,6 +51,12 @@ white paint
 super glow glass
 super glow glass
 super glow glass
+
+recipe for low-glow-stained-glass:
+as above, but substitute 'glow glass' for super glow glass.
+
+recipe for no-glow-stained-glass:
+as regular stained glass, but substitute plain 'glass' for super glow glass
 
 
 All recipes produce three glowing stained glass blocks.
@@ -272,6 +278,9 @@ defineregular{colorcode="11_91", colorname="faint_red", recipe="group:dye,unicol
 defineregular{colorcode="12_91", colorname="faint_orange", recipe="group:dye,unicolor_light_orange"}
 
 -- END JDA
+
+dofile(minetest.get_modpath("stained_glass").."/noglow.lua")
+dofile(minetest.get_modpath("stained_glass").."/lowglow.lua")
 
 print("[stained_glass] Loaded!")
 

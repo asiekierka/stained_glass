@@ -3,6 +3,11 @@ Changelog
 
 ---------
 
+ver 1.5
+
+Sun 25 Aug 2013
+added low-glow (brightness 11) and noglow (brightness 0) stained glass blows, using glow_glass and regular glass accordingly.
+
 ver 1.4
 
 Thu 22 Aug 2013
