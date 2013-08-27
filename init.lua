@@ -1,8 +1,8 @@
 --[[
 
-Stained Glass 1.5
+Stained Glass 
 
-This mod provides luminescent stained glass blocks for Minetest 0.4.x.
+This mod provides luminescent stained glass blocks for Minetest 0.4.7+
 
 Depends:
 [moreblocks] by Calinou
@@ -22,7 +22,6 @@ out of creative inventory.
 
 August 2013 -- Jeremy Anderson tries to get this working after the new color
 changes, and to resurrect the craft recipes. Still GPL'd as far as I'm concerned.
-
 
 August 2013 -- rewritten a bit by VanessaEzekowitz to further condense the code.
 
@@ -68,114 +67,93 @@ All recipes produce three stained glass blocks.
 ]]--
 
 function makenode(arg)
-	name=arg.blockname
+	local name=arg.blockname
+	local myglow=arg.glow
+	local myprefix=arg.prefix
 
 	--register item attributes
 
-	minetest.register_node("stained_glass:"..arg.prefix..name, {
-		description = "Stained Glass - "..arg.prefix..name,
+	minetest.register_node("stained_glass:"..myprefix..name, {
+		description = "Stained Glass - "..myprefix..name,
 		drawtype = "glasslike",
 		tiles = {"stained_glass_" .. name .. ".png"},
 		paramtype = "light",
 		sunlight_propagates = true,
 		use_texture_alpha = true,
-		light_source = arg.light,
+		light_source = myglow,
 		is_ground_content = true,
 		groups = {snappy=2,cracky=3,oddly_breakable_by_hand=3, not_in_creative_inventory=1},
 		sounds = default.node_sound_glass_defaults()
 	})
 end
 
+function stained_glass_define(arg)
+	local code=arg.colorcode
+	local name=arg.colorname	
+	local rawdyename=arg.recipe 
+	local mydye=arg.recipe 
+	local myshadename=arg.shade
 
--- the purpose of this is to abstract out all the registration 
--- stuff - duplicated code is bad mmmmmkay?  At least where one can avoid it 
+	local stained_glass_blocktype = {
+		[""]="moreblocks:super_glow_glass" ,
+		["lowglow_"]="moreblocks:glow_glass",
+		["noglow_"]="default:glass",
+		-- here you can define alternate glowlevels, with
+		-- what type of glass they should use.
+		-- levels added here must be added
+		-- below (in stained_glass_lightlevel), too.
+	}
 
--- so, instead of 4 loops that each have craft registrations, 
--- we'll have one block that does registrations, and just call
--- the procedure repeatedly
---
+	local stained_glass_lightlevel = {
+		["noglow_"] = 0,
+		[""] = LIGHT_MAX,
+		["lowglow_"] = LIGHT_MAX-3,
 
-function stained_glass_define_regular(arg)
-	code=arg.colorcode
-	name=arg.colorname	
-	mydye=arg.recipe 
-	myprefix = arg.prefix
-	glasstype = arg.glasstype
+		-- define alternate light levels here, with a new
+		-- prefix name and a new light level.  perhaps you'd
+		-- like "dim" at a level of '6' for example.
+	}
 
-	minetest.register_craft({
-		type = "shapeless",
-		output = "stained_glass:"..myprefix..name.." 3",
-		recipe = { 
-			mydye,
-			glasstype,
-			glasstype,
-			glasstype,
-			},
-	})
+	for myprefix,myglow in pairs(stained_glass_lightlevel) do
+		local glasstype = stained_glass_blocktype[myprefix]
 
-	makenode{blockname=name, light=arg.light, prefix=myprefix}
+		-- define myrecipe as a table, pass it in.
 
-	if myprefix == "" then
-		minetest.register_alias( "stained_glass:" .. code, "stained_glass:" .. name)
-	end
-	-- and an alias from the numeric to the named block
-	-- we need to keep the numeric block for all the people that used
-	-- pre-v1.4 blocks in their worlds.
+		local myrecipe = { mydye, glasstype, glasstype, glasstype }
+		-- those four items will ALWAYS be there.  For faint and pastel, we 
+		-- need to add additional dyes.  If you have defined a new shade, then
+		-- you should probably handle it here.  
 
-end
+		if myshadename == "pastel_" then
+			myrecipe[5] = "dye:white"
+		end
 
-function stained_glass_define_pastel(arg)
-	code=arg.colorcode
-	name=arg.colorname
-	mydye=arg.recipe
-	myprefix = arg.prefix
-	glasstype = arg.glasstype
+		if myshadename == "faint_" then
+			myrecipe[5] = "dye:white"
+			myrecipe[6] = "dye:white"
+		end
 
-	minetest.register_craft({
-		type = "shapeless",
-		output = "stained_glass:"..myprefix..name .." 3",
-		recipe = { 
-			mydye,
-			"dye:white",
-			glasstype,
-			glasstype,
-			glasstype,
-			},
-	})
+		minetest.register_craft({
+			type = "shapeless",
+			output = "stained_glass:"..myprefix..name.." 3",
+			recipe = myrecipe,
+		})
 
-	makenode{blockname=name,light=arg.light, prefix=myprefix}
+		makenode{blockname=name, glow=myglow, prefix=myprefix}
 
-	if myprefix == "" then
-		minetest.register_alias( "stained_glass:" .. code, "stained_glass:" .. name)
-	end
-end
-
-function stained_glass_define_faint(arg)
-	code=arg.colorcode
-	name=arg.colorname	
-	mydye=arg.recipe
-	myprefix = arg.prefix
-	glasstype = arg.glasstype
-
-	minetest.register_craft({
-		type = "shapeless",
-		output = "stained_glass:"..myprefix..name.." 3",
-		recipe = { 
-			mydye,
-			"dye:white",
-			"dye:white",
-			glasstype,
-			glasstype,
-			glasstype,
-			},
-	})
-
-	--register item attributes
-	--
-	makenode{blockname=name,light=arg.light, prefix=myprefix}
-
-	if myprefix == "" then
-		minetest.register_alias( "stained_glass:" .. code, "stained_glass:" .. name)
+		if myprefix == "" then
+			minetest.register_alias( "stained_glass:" .. code, "stained_glass:" .. name)
+			if string.match(name,"redviolet") then
+				oldname=name
+				name=string.gsub(name, "redviolet","red_violet") -- need to support red_violet existence, too.
+				minetest.register_alias( "stained_glass:" .. name, "stained_glass:" .. oldname)
+			end
+		end
+		-- and an alias from the numeric to the named block
+		-- we need to keep the numeric block for all the people that used
+		-- pre-v1.4 blocks in their worlds.
+		-- no aliases for noglow- and lowglow- blocks, because they didn't
+		-- exist until v1.5
 	end
 end
 
@@ -189,13 +167,16 @@ stained_glass_hues = {
 	{ "green", true },
 	{ "aqua", false },
 	{ "cyan", false },
-	{ "skyblue", false },
+	{ "skyblue", true },
 	{ "blue", false },
-	{ "violet", true },
+	{ "violet", false }, 
 	{ "magenta", true },
 	{ "redviolet", true },
 	{ "red", true },
 	{ "orange", false },
+
+-- please note that these only apply when our shadelevel is ""
+
 }
 
 stained_glass_shades = {
@@ -205,14 +186,69 @@ stained_glass_shades = {
 	{"light_",  8  },
 	{"pastel_", 9  },
 	{"faint_",  91 }
+
+	-- note that dark_ medium_ and plain also have a half-saturation
+	--  equivalent automatically defined in the code
 }
 
-dofile(minetest.get_modpath("stained_glass").."/high_glow.lua") 
-dofile(minetest.get_modpath("stained_glass").."/low_glow.lua") 
-dofile(minetest.get_modpath("stained_glass").."/no_glow.lua") 
+for i in ipairs(stained_glass_hues) do
 
-dofile(minetest.get_modpath("stained_glass").."/noglow.lua")
-dofile(minetest.get_modpath("stained_glass").."/lowglow.lua")
+	local huename = stained_glass_hues[i][1]
+	local huenumber = i
+
+	for j in ipairs(stained_glass_shades) do
+
+		local shadename = stained_glass_shades[j][1]
+		local shadenumber = stained_glass_shades[j][2]
+
+		local recipevalue = nil
+
+ 		recipevalue = "group:dye,unicolor_"..shadename..huename
+		if (shadename == "" and stained_glass_hues[i][2]) then
+			-- print(huename .. " is set to true -- substituting dye:huename ")
+			recipevalue = "dye:"..huename
+		elseif (shadename=="pastel_" or shadename=="faint_") then 
+			-- force light_dye for pastel and faint colors
+			recipevalue = "group:dye,unicolor_light_"..huename
+		else  -- default case
+			recipevalue = "group:dye,unicolor_"..shadename..huename
+		end
+
+		if shadename == "dark_" or shadename == "medium_" or shadename == "" then
+			stained_glass_define({
+				colorcode = huenumber.."_"..shadenumber.."_7",
+				colorname = shadename..huename,
+				recipe = recipevalue,
+				shade = shadename,
+			})
+
+			-- below is the automatic "half saturation" block
+			-- which was mentioned previously
+			-- this is unicolor only, so switch dyename
+			-- back to unicolor...
+			recipevalue="group:dye,unicolor_"..shadename..huename
+			stained_glass_define({
+				colorcode = huenumber.."_"..shadenumber.."_6",
+				colorname = shadename..huename.."_s50",
+				recipe = recipevalue.."_s50",
+				shade = shadename,
+			})
+			-- because we define two blocks inside this chunk of
+			--  code, we can't just define the relevant vars and
+			--  move the proc_call after the if-then loop.
+
+		elseif shadename == "light_" or shadename == "pastel_" or shadename == "faint_" then 
+			stained_glass_define({
+				colorcode = huenumber.."_"..shadenumber.."_",
+				colorname = shadename..huename,
+				recipe = recipevalue,
+				shade = shadename,
+			})
+			
+		end
+
+	end
+end
 
 print("[stained_glass] Loaded!")
 

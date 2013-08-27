@@ -2,6 +2,11 @@
 Changelog
 
 ---------
+ver 1.5.1
+
+Mon 26 Aug 2013
+prompted by VanessaE's initial cleanup, MUCH cleanup of the code.  No need to have > 1 file anymore.
+
 
 ver 1.5
 
