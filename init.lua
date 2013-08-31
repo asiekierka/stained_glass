@@ -94,25 +94,24 @@ function stained_glass_define(arg)
 	local mydye=arg.recipe 
 	local myshadename=arg.shade
 
-	local stained_glass_blocktype = {
-		[""]="moreblocks:super_glow_glass" ,
-		["lowglow_"]="moreblocks:glow_glass",
-		["noglow_"]="default:glass",
-		-- here you can define alternate glowlevels, with
-		-- what type of glass they should use.
-		-- levels added here must be added
-		-- below (in stained_glass_lightlevel), too.
-	}
+	local stained_glass_blocktype = { }
 
-	local stained_glass_lightlevel = {
-		["noglow_"] = 0,
-		[""] = LIGHT_MAX,
-		["lowglow_"] = LIGHT_MAX-3,
+	local stained_glass_lightlevel = { }
+	
+	if stained_glass.full_light then
+		stained_glass_lightlevel[""] = LIGHT_MAX
+		stained_glass_blocktype[""] = "moreblocks:super_glow_glass"
+	end  -- see settings.txt for these settings.
 
-		-- define alternate light levels here, with a new
-		-- prefix name and a new light level.  perhaps you'd
-		-- like "dim" at a level of '6' for example.
-	}
+	if stained_glass.med_light then
+		stained_glass_lightlevel["lowglow_"] = LIGHT_MAX-3
+		stained_glass_blocktype["lowglow_"] = "moreblocks:glow_glass"
+	end
+
+	if stained_glass.no_light then
+		stained_glass_lightlevel["noglow_"] = 0
+		stained_glass_blocktype["noglow_"] = "default:glass"
+	end
 
 	for myprefix,myglow in pairs(stained_glass_lightlevel) do
 		local glasstype = stained_glass_blocktype[myprefix]
@@ -160,6 +159,16 @@ end
 -- true means this color's recipe must use a direct "dye:xxxxx" item name
 -- (perhaps because the related groups overlap two or more distinct colors)
 -- false means the recipe uses "group:dye,unicolor_xxxxx"
+
+stained_glass= {}
+local worldpath=minetest.get_worldpath()
+local modpath=minetest.get_modpath("stained_glass")
+dofile(modpath .. "/settings.txt")
+
+-- the new settings.txt file has a variety of possible settings.
+-- see the file for examples.  We'll access those settings where its important, in
+-- the stained glass module, where we'll build up the tables to contain 
+-- only what we need. 
 
 stained_glass_hues = {
 	{ "yellow", true },

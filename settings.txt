@@ -1,0 +1,3 @@
+stained_glass.full_light = true
+stained_glass.med_light = true
+stained_glass.no_light = true

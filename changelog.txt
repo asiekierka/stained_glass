@@ -2,6 +2,10 @@
 Changelog
 
 ---------
+ver 1.6
+Fri 30 Aug 2013
+added configfile settings.txt to allow disabling of full_light (super_glow_glass-based), med_light (glow_glass-based) and no_light (default:glass) blocks.  just set the relevant fields to 'false' and they will not be loaded when you start the game.  
+
 ver 1.5.1
 
 Mon 26 Aug 2013

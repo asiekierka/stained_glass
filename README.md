@@ -1,7 +1,6 @@
 
-
 Doyousketch2's Stained Glass mod
- ver 1.4
+ ver 1.6
 
 Image: http://oi47.tinypic.com/hst6s3.jpg
 
@@ -87,6 +86,8 @@ The Palette includes:
 Full & half-saturation, medium and dark shades have been included
 as well as light, pastel, and faint tints.
 
+Look at settings.txt to see how you can enable/disable full-glow, half-glow and no-glow blocks -- tested in all combinations.  enjoy.
+
 
 ==============================================================================
 
@@ -100,6 +101,9 @@ or /giveme stained_glass:light_yellow
 or /giveme stained_glass:pastel_yellow
 or /giveme stained_glass:faint_yellow
 or /giveme stained_glass:yellow
+
+or /giveme stained_glass:lowglow_yellow
+or /giveme stained_glass:noglow_dark_green
 
 You get the idea.  
 
