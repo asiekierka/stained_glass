@@ -2,23 +2,23 @@
 Changelog
 
 ---------
+ver 1.7
+Sat 1 Sep 2013
+I like trapglass, so _all_ variants of stained_glass are now available as (identical) trapglass variants.   also, ability to ditch trapglass blocks via settings.txt added.  In fact, you can now pick and choose which variants of stained_glass you wish to enable.
+
 ver 1.6
 Fri 30 Aug 2013
 added configfile settings.txt to allow disabling of full_light (super_glow_glass-based), med_light (glow_glass-based) and no_light (default:glass) blocks.  just set the relevant fields to 'false' and they will not be loaded when you start the game.  
 
 ver 1.5.1
-
 Mon 26 Aug 2013
 prompted by VanessaE's initial cleanup, MUCH cleanup of the code.  No need to have > 1 file anymore.
 
-
 ver 1.5
-
 Sun 25 Aug 2013
 added low-glow (brightness 11) and noglow (brightness 0) stained glass blows, using glow_glass and regular glass accordingly.
 
 ver 1.4
-
 Thu 22 Aug 2013
 *phew*  made aliases for all numeric block names to map to new color-name based scheme
 updated craft recipes to work with new dyes format
