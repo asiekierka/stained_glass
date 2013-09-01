@@ -1,6 +1,6 @@
 
 Doyousketch2's Stained Glass mod
- ver 1.6
+ ver 1.7
 
 Image: http://oi47.tinypic.com/hst6s3.jpg
 
@@ -36,8 +36,27 @@ https://github.com/andersje/stained_glass
 -- this will get you the latest version of the code, and you
 can update at any time by doing a git pull
 
+
+
+==============================================================================
+To turn off types of glass, alter settings.txt in the stained_glass directory.
+By default, all six (SIX!) types of stained_glass are enabled:  regular (based on super_glow_glass), med_glow (based on glow_glass) and no-glow (Based on default:glass), trap regular (based on trap_super_glow_glass), trap med_glow (based on trap_glow_glass) and trap_noglow (based on trapglass)
+
+stained_glass.full_light = true
+stained_glass.med_light = true
+stained_glass.no_light = true
+stained_glass.trap_full_light = true
+stained_glass.trap_med_light = true
+stained_glass.trap_no_light = true
+
+Setting any of these to false will prevent that type of stained_glass from being loaded.  If you set them all to false, you won't get any stained_glass.  Mix and match as you choose -- you can turn on only one, if you wish, and it will work just fine.
+
+One of the high points of trap stained glass is that liquids flow through it -- making illuminated waterfalls a possibility.
+
+
 ==============================================================================
 
+(use trap super glow glass or trap glow glass or trapglass  -- now available in moreblocks -- to make the trap variant of this)
 
 Recipe for standard colors:
 
@@ -49,6 +68,7 @@ image: http://oi50.tinypic.com/1ibs7c.jpg
 	super glow glass
 
 
+
 Recipe for pastel colors:
 
 image: http://oi45.tinypic.com/2wbvkti.jpg
@@ -58,7 +78,6 @@ image: http://oi45.tinypic.com/2wbvkti.jpg
 	super glow glass
 	super glow glass
 	super glow glass
-
 
 Recipe for faint colors:
 
@@ -104,6 +123,9 @@ or /giveme stained_glass:yellow
 
 or /giveme stained_glass:lowglow_yellow
 or /giveme stained_glass:noglow_dark_green
+or /giveme stained_glass:trap_noglow_dark_green
+or /giveme stained_glass:trap_lowglow_yellow 
+or /giveme stained_glass:trap_medium_aqua
 
 You get the idea.  
 
